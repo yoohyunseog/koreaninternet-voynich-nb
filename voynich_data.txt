@@ -1,0 +1,17 @@
+# 보이니치 문서 샘플 데이터
+# 실제 보이니치 필사본에서 발췌한 텍스트들
+
+# f1r (첫 번째 페이지)
+fachys ykal ar ataiin shol shory cthres y kor sholdy
+sory ckhar o y kair chtaiin shar are cthar cthar dan
+syaiir sheky okaiin oksho kshod okain dam
+
+# f2r 
+qokaiin qokeedy qokaiin chedy qoaiin shedy qokedy qokedy chol
+qokeedy qokaiin chedy qokaiin shedy qokeedy qokain chedy
+
+# f3r
+daiin okaiin dain okaiin daiin okaiin otaldy qokaiin
+chol sheedy qokeedy qotedy qokeedy chedy qokeedy
+
+# 더 많은 텍스트를 여기에 추가할 수 있습니다
