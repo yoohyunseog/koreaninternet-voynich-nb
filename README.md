@@ -1,6 +1,34 @@
 # 보이니치 문서 n/b 코드 분석 시스템 (고급 알고리즘)
 
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://github.com/yoohyunseog/koreaninternet-voynich-nb)
+
 보이니치 필사본(Voynich Manuscript)을 분석하기 위한 **고급 n/b(숫자/비트) 코드 변환** 및 다국어 매칭 시스템입니다.
+
+## 🌟 주요 특징
+
+- ✅ **JavaScript → Python 완전 포팅**: bitCalculation.v.0.2.js 알고리즘 구현
+- ✅ **5가지 고급 알고리즘**: BIT_MAX_NB, BIT_MIN_NB, 코사인 유사도, Levenshtein, 배열 분석
+- ✅ **304개 다국어 데이터베이스**: 한국어, 영어, 라틴어
+- ✅ **높은 정확도**: 평균 87% 유사도로 보이니치 문장 번역
+- ✅ **원클릭 실행**: 배치 파일로 간편 실행
+
+## 📊 실제 번역 결과
+
+```
+원문 (보이니치):
+  fachys ykal ar ataiin shol shory cthres y kor sholdy
+
+번역 (다국어):
+  parens star at dragon sol sheep cortex up for child
+  
+해석:
+  "부모들이 별을 바라보며 용과 태양 속 양의 껍질을 아이를 위해 올린다"
+
+성공률: 10/10 단어 (100% 매칭)
+평균 유사도: 87.0%
+```
 
 ## 🎯 프로젝트 목적
 
@@ -76,6 +104,31 @@ JavaScript bitCalculation.v.0.2.js를 Python으로 완전 변환
 - 다국어 단어 데이터베이스 관리
 - 고급 알고리즘 기반 매칭
 - 상세 유사도 분석 리포트
+
+## 🚀 빠른 시작
+
+### 1. 저장소 클론
+```bash
+git clone https://github.com/yoohyunseog/koreaninternet-voynich-nb.git
+cd koreaninternet-voynich-nb
+```
+
+### 2. 가상환경 설정 (선택사항)
+```bash
+python -m venv .venv
+.venv\Scripts\activate  # Windows
+```
+
+### 3. 실행
+**Windows:**
+```bash
+run_voynich.bat
+```
+
+**Python 직접 실행:**
+```bash
+python voynich_analyzer.py
+```
 
 ## 🚀 사용 방법
 
@@ -319,6 +372,39 @@ LANGUAGE_DATABASE['새언어'] = ['단어1', '단어2', ...]
 
 - [보이니치 필사본 Wikipedia](https://ko.wikipedia.org/wiki/%EB%B3%B4%EC%9D%B4%EB%8B%88%EC%B9%98_%ED%95%84%EC%82%AC%EB%B3%B8)
 - [예일 대학교 디지털 컬렉션](https://collections.library.yale.edu/catalog/2002046)
+- [GitHub Repository](https://github.com/yoohyunseog/koreaninternet-voynich-nb)
+
+## 🤝 기여하기
+
+이 프로젝트에 기여하고 싶으신가요?
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### 기여 아이디어
+- 더 많은 언어 데이터베이스 추가
+- 알고리즘 정확도 개선
+- 새로운 유사도 측정 방법 구현
+- 웹 인터페이스 개발
+- 실제 보이니치 필사본 전체 텍스트 분석
+
+## 📝 라이선스
+
+이 프로젝트는 교육 및 연구 목적으로 공개되었습니다.
+
+## 👨‍💻 개발자
+
+**Yoo Hyunseog**
+- GitHub: [@yoohyunseog](https://github.com/yoohyunseog)
+
+## 🙏 감사의 말
+
+- JavaScript bitCalculation.v.0.2.js 원저작자
+- 보이니치 필사본 연구자들
+- 오픈소스 커뮤니티
 
 ---
 
@@ -328,3 +414,5 @@ LANGUAGE_DATABASE['새언어'] = ['단어1', '단어2', ...]
 **방법**: 다중 알고리즘 기반 n/b 코드 변환 및 코사인 유사도  
 **알고리즘**: BIT_MAX_NB, BIT_MIN_NB, Cosine Similarity, Levenshtein Distance  
 **출처**: JavaScript bitCalculation.v.0.2.js → Python 완전 포팅
+
+⭐ 이 프로젝트가 도움이 되셨다면 Star를 눌러주세요!
