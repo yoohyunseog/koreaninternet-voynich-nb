@@ -127,7 +127,7 @@ def main() -> int:
     parser.add_argument("--voynich", default="outputs/voynich_nb_words.json", help="Voynich n/b JSON path")
     parser.add_argument("--english", default="outputs/english_nb_words.json", help="English n/b JSON path")
     parser.add_argument("--output", default="outputs/voynich_to_english_sentence.txt", help="Output text path")
-    parser.add_argument("--limit", type=int, default=100, help="Number of Voynich words to map")
+    parser.add_argument("--limit", type=int, default=1000, help="Number of Voynich words to map")
     parser.add_argument("--model", default="gpt-4o-mini", help="OpenAI model for translation")
     args = parser.parse_args()
 

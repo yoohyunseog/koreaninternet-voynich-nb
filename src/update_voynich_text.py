@@ -43,7 +43,7 @@ def create_voynich_section(pairs: List[Tuple[str, str]]) -> str:
         return ""
     
     links = []
-    for voynich_word, english_word in pairs[:150]:  # Limit to 150 for readability
+    for voynich_word, english_word in pairs[:1000]:  # Limit to 1000 for readability
         escaped_voynich = (
             voynich_word.replace("&", "&amp;")
             .replace("<", "&lt;")
