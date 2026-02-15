@@ -147,11 +147,23 @@
         .word-links {
             line-height: 2.2;
             font-size: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+            border: 1px solid rgba(184, 92, 56, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
         }
 
         .voynich-links {
             line-height: 2.4;
             font-size: 0.9rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+            border: 1px solid rgba(184, 92, 56, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
         }
 
         .voynich-links a {
@@ -161,6 +173,58 @@
         .voynich-links a:hover {
             background-color: rgba(184, 92, 56, 0.1);
             border-bottom: 2px solid var(--primary-color);
+        }
+
+        .english-story {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid rgba(184, 92, 56, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            line-height: 2;
+        }
+
+        .story-box {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid rgba(184, 92, 56, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            line-height: 2;
+            color: var(--text-muted);
+        }
+
+        /* 스크롤바 스타일 */
+        .word-links::-webkit-scrollbar,
+        .voynich-links::-webkit-scrollbar,
+        .english-story::-webkit-scrollbar,
+        .story-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .word-links::-webkit-scrollbar-track,
+        .voynich-links::-webkit-scrollbar-track,
+        .english-story::-webkit-scrollbar-track,
+        .story-box::-webkit-scrollbar-track {
+            background: rgba(184, 92, 56, 0.05);
+            border-radius: 10px;
+        }
+
+        .word-links::-webkit-scrollbar-thumb,
+        .voynich-links::-webkit-scrollbar-thumb,
+        .english-story::-webkit-scrollbar-thumb,
+        .story-box::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .word-links::-webkit-scrollbar-thumb:hover,
+        .voynich-links::-webkit-scrollbar-thumb:hover,
+        .english-story::-webkit-scrollbar-thumb:hover,
+        .story-box::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
         
         footer {
