@@ -42,11 +42,18 @@
 
 ```
 보이니치/
-├── voynich_analyzer.py          # 메인 분석 시스템
-├── advanced_nb_calculator.py    # 고급 n/b 비트 계산 엔진
-├── language_database.py         # 다국어 단어 데이터베이스
-├── voynich_data.txt             # 보이니치 문서 샘플
-├── run_voynich.bat              # 실행 배치 파일
+├── src/                         # 분석 스크립트 및 코어 모듈
+│   ├── voynich_analyzer.py
+│   ├── advanced_nb_calculator.py
+│   ├── language_database.py
+│   └── ...
+├── data/                        # 입력 데이터
+│   ├── voynich.nowhitespace.txt
+│   └── voynich_data.txt
+├── outputs/                     # 결과 출력
+│   └── voynich_full_translation_english_only.txt
+├── tools/                       # 유틸리티/배치 파일
+│   └── run_voynich.bat
 └── README.md                    # 이 파일
 ```
 
@@ -122,19 +129,19 @@ python -m venv .venv
 ### 3. 실행
 **Windows:**
 ```bash
-run_voynich.bat
+tools\run_voynich.bat
 ```
 
 **Python 직접 실행:**
 ```bash
-python voynich_analyzer.py
+python src/voynich_analyzer.py
 ```
 
 ## 🚀 사용 방법
 
 ### 간편 실행 (추천)
 ```bash
-run_voynich.bat
+tools\run_voynich.bat
 ```
 배치 파일이 자동으로:
 - ✅ 가상환경 활성화 (`E:\python_env\Scripts\activate.bat`)
@@ -144,10 +151,10 @@ run_voynich.bat
 ### 수동 실행
 ```bash
 # 가상환경 활성화
-E:\python_env\Scripts\activate.bat
+.venv\Scripts\activate.bat
 
 # 프로그램 실행
-python voynich_analyzer.py
+python src/voynich_analyzer.py
 ```
 
 ### 커스텀 분석 (Python 코드)

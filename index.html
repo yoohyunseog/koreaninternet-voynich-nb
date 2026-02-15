@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="보이니치 원고의 신비로운 해석">
+    <title>보이니치 원고의 신비로운 해석</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #b85c38;
+            --primary-dark: #a04d2f;
+            --bg-light: #f6f1e8;
+            --text-dark: #333;
+            --text-muted: #666;
+        }
+        
+        * {
+            font-family: 'Nanum Myeongjo', 'Noto Serif KR', 'Georgia', serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.8rem;
+        }
+        
+        header .subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0.98;
+            letter-spacing: 0.5px;
+        }
+        
+        header .date {
+            font-size: 0.95rem;
+            opacity: 0.90;
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section-card {
+            background: white;
+            border: none;
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+        }
+        
+        .section-card h2 {
+            color: var(--primary-color);
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(184, 92, 56, 0.15);
+            position: relative;
+        }
+        
+        .section-card h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .section-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-card ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        
+        .section-card li {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .section-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .section-card a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, rgba(184, 92, 56, 0.06) 0%, rgba(184, 92, 56, 0.03) 100%);
+            border-left: 5px solid var(--primary-color);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin: 2rem 0;
+            line-height: 2;
+            white-space: pre-wrap;
+            background-attachment: fixed;
+        }
+        
+        .english-story {
+            background: #fafafa;
+            border-left: 5px solid var(--primary-color);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            line-height: 2;
+            color: var(--text-muted);
+            margin: 2rem 0;
+        }
+        
+        .word-links {
+            line-height: 2.2;
+            font-size: 1rem;
+        }
+
+        .voynich-links {
+            line-height: 2.4;
+            font-size: 0.9rem;
+        }
+
+        .voynich-links a {
+            border-bottom: 1px dotted var(--primary-color);
+        }
+
+        .voynich-links a:hover {
+            background-color: rgba(184, 92, 56, 0.1);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            opacity: 0.98;
+        }
+        
+        .container-content {
+            max-width: 950px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-card {
+                border-left-width: 5px;
+                padding: 1.5rem !important;
+            }
+            
+            .section-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="mb-3">보이니치 원고의 신비로운 해석</h1>
+            <p class="subtitle mb-2">N/B 알고리즘 엔진을 통한 AI 해석</p>
+            <p class="date">작성일: 2026년 2월 15일</p>
+        </div>
+    </header>
+    
+    <main class="container container-content">
+        <div class="section-card card border-0 p-4">
+            <h2>알고리즘 설명</h2>
+            <p>
+                이 프로젝트는 <strong>N/B 코드 알고리즘</strong>을 사용하여 보이니치 원고를 해석합니다:
+            </p>
+            <ul class="list-unstyled">
+                <li><strong>BIT_MAX_NB</strong>: 각 문자를 유니코드 값으로 변환 후, 가중치를 적용하여 전방향으로 누적</li>
+                <li><strong>BIT_MIN_NB</strong>: 동일한 방식으로 후방향으로 누적</li>
+                <li><strong>매칭 알고리즘</strong>: 보이니치 단어의 (BIT_MAX_NB, BIT_MIN_NB) 값과 가장 가까운 영어 단어를 탐색</li>
+                <li><strong>중복 방지</strong>: 최근 5개 단어에 패널티를 적용하여 단어의 다양성 확보</li>
+                <li><strong>GPT 번역</strong>: 매칭된 영어 단어를 개별적으로 한국어로 번역</li>
+            </ul>
+            <p class="mt-3 mb-0">
+                이를 통해 보이니치 원고의 1495개 영어 데이터베이스와의 무작위 숫자 비교가 아닌, 수학적 거리 함수를 기반으로 한 의미 있는 해석을 제공합니다.
+            </p>
+        </div>
+        
+
+        <div class="section-card card border-0 p-4" id="voynich-original">
+            <h2>보이니치 원고 원문 문자 (매칭 결과)</h2>
+            <p class="mb-3">원본 보이니치 원고의 문자들을 N/B 알고리즘으로 해석한 영어 단어와 함께 표시합니다. 마우스를 올리면 매칭된 영어 단어를 확인할 수 있습니다.</p>
+            <div class="word-links voynich-links">
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="fa19s9 → ox">fa19s9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon" title="haeayAkam2oe → snapdragon">haeayAkam2oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="oy9ýscs9hoy2oe89soy9Hayoy → lightning">oy9ýscs9hoy2oe89soy9Hayoy</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="9hacy1kam2ayAisKayKay8aNs9aIy2ch9oy9ham → multiplication">9hacy1kam2ayAisKayKay8aNs9aIy2ch9oy9ham</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sky" title="o8Ko → sky">o8Ko</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+valley" title="ay9Kcs8ay → valley">ay9Kcs8ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="ams98omokcc9okcoyy → constellation">ams98omokcc9okcoyy</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="oeok9èAay8amohamoyohaNsaz91cayKamJayFam98ayai29 → chrysanthemum">oeok9èAay8amohamoyohaNsaz91cayKamJayFam98ayai29</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="o8ayÙ → ox">o8ayÙ</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+stream" title="oeGo9o98ay → stream">oeGo9o98ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+earth" title="sFoam → earth">sFoam</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+go" title="o8ay99 → go">o8ay99</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="c92o89oh1o9ok1oe1oK9os → lightning">c92o89oh1o9ok1oe1oK9os</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="198an1oyhos8am2osFoe2o898anoykco8 → multiplication">198an1oyhos8am2osFoe2o898anoykco8</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="š98anGcsamoesGc99kan2o29Jo8aecsoh → constellation">š98anGcsamoesGc99kan2o29Jo8aecsoh</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="2oh2o9okaznokcoeohaN2o8ans → chrysanthemum">2oh2o9okaznokcoeohaN2o8ans</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding" title="v198am2o9Hc9ho8amG9Jo8aIesL92ooe7an78anom1oeo8am1o8an189ohan7aNK9ho88am2Hc9Hoy1ay3c9hoe → understanding">v198am2o9Hc9ho8amG9Jo8aIesL92ooe7an78anom1oeo8am1o8an189ohan7aNK9ho88am2Hc9Hoy1ay3c9hoe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="1oe1oehoy1ae3o1oe2o8aNh → magnificence">1oe1oehoy1ae3o1oe2o8aNh</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+enlightenment" title="9h1e8oy1o8am2ohccap91ok1c91chan → enlightenment">9h1e8oy1o8am2ohccap91ok1c91chan</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+hill" title="cog2oe89898K98aiý9 → hill">cog2oe89898K98aiý9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="ko3oe3cho82c9Jcae98ayan8anH98s81ay → multiplication">ko3oe3cho82c9Jcae98ayan8anH98s81ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal" title="KamohaZ → crystal">KamohaZ</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+a" title="1c9 → a">1c9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake" title="19úkoeKoes8aoEko2oh1oy1c98anHc9okoe8aM → rattlesnake">19úkoeKoes8aoEko2oh1oy1c98anHc9okoe8aM</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lake" title="Go2am → lake">Go2am</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon" title="oh1C91oek2o8ccs92c9g98C919yo8ay → snapdragon">oh1C91oek2o8ccs92c9g98C919yo8ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="7an1oe8anKae8ay → lightning">7an1oe8anKae8ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+pomegranate" title="cayham8ay5c9Kay1o → pomegranate">cayham8ay5c9Kay1o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="oham2oamohoe8améayKoe8amKoe8ay91C9ohC9oh98amo → constellation">oham2oamohoe8améayKoe8amKoe8ay91C9ohC9oh98amo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal" title="h1c9hohamo → crystal">h1c9hohamo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+valley" title="1oehA7198ae81co2o89hoÐ19K9oh → valley">1oehA7198ae81co2o89hoÐ19K9oh</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+whirlwind" title="1c9hcc9hcc98ae1koy2o → whirlwind">1c9hcc9hcc98ae1koy2o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sky" title="1oe1H → sky">1oe1H</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+earth" title="1ok91okc981am → earth">1ok91okc981am</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="h1s91o8amoeoek1c91ayFaxap9kcc91ayoyo1981oeho89oho8ay1o898oH9HoH9598h3C9K9hok1o898ae8oe1ohco8az8apso1c91oho89 → multiplication">h1s91o8amoeoek1c91ayFaxap9kcc91ayoyo1981oeho89oho8ay1o898oH9HoH9598h3C9K9hok1o898ae8oe1ohco8az8apso1c91oho89</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ocean" title="goko92oe → ocean">goko92oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="azGoae8ay1c9ko89okoam3o391oh91oeKo → constellation">azGoae8ay1c9ko89okoam3o391oh91oeKo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+a" title="e → a">e</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="2oeAhae7oe1c91o8oeoe19K9¹oe1oCs1coe8oeKc99hoe8oe8oeo9hoe8o → chrysanthemum">2oeAhae7oe1c91o8oeoe19K9¹oe1oCs1coe8oeKc99hoe8oe8oeo9hoe8o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="e → ox">e</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="1o89ohoe2oehoehc191oeh91oeKoe1o891oe8am2oyohae1oe8oe → multiplication">1o89ohoe2oehoehc191oeh91oeKoe1o891oe8am2oyohae1oe8oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="h98ay2oe81oyok1o8ay → lightning">h98ay2oe81oyok1o8ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal" title="o89kooy1ok1c98ae1o89s1o89éoe1o8ay → crystal">o89kooy1ok1c98ae1o89s1o89éoe1o8ay</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake" title="h98an99g1oe8amok1ae9j1amHoes98oy1oy91hays2oyK9ý4okamKc991oy199891amãaI891ko8 → rattlesnake">h98an99g1oe8amok1ae9j1amHoes98oy1oy91hays2oyK9ý4okamKc991oy199891amãaI891ko8</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sky" title="89G98aes1 → sky">89G98aes1</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="okam8oko1oyae2o8am1oe8aN9k1am8aNsam8an88hoesoy9koe8981oe819K92oyH98am91oe8aN → constellation">okam8oko1oyae2o8am1oe8aN9k1am8aNsam8an88hoesoy9koe8981oe819K92oyH98am91oe8aN</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+pomegranate" title="h98an2am4o9s2oefo8aN9h2oe → pomegranate">h98an2am4o9s2oefo8aN9h2oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+hill" title="2C98aIe898es → hill">2C98aIe898es</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="2ohoe2C94ohc99ho89so1oe → lightning">2ohoe2C94ohc99ho89so1oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="9h98an8aZoeºh91oeam2oe2ch98amKc9hcoes → multiplication">9h98an8aZoeºh91oeam2oe2ch98amKc9hcoes</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="amÐ → ox">amÐ</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake" title="91an8ae198aeoy2aN8aNoes → rattlesnake">91an8ae198aeoy2aN8aNoes</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="am2C9Hoyohoe191oyKoy9oyaN1aNs → constellation">am2C9Hoyohoe191oyKoy9oyaN1aNs</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+whirlwind" title="am1ck919h9sae2o9hC91c98am1K9 → whirlwind">am1ck919h9sae2o9hC91c98am1K9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="hoom1cog1oyokam → magnificence">hoom1cog1oyokam</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain" title="o8an1oy8az2k9h1A → mountain">o8an1oy8az2k9h1A</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning" title="h192o3oe4ok1oeods4ok91o → lightning">h192o3oe4ok1oeods4ok91o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal" title="y8amok191oye → crystal">y8amok191oye</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake" title="91oe1o891o8an1K98am2o1oeo1coy1o8am → rattlesnake">91oe1o891o8an1K98am2o1oeo1coy1o8am</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="h1oy298aM1ç9s2c98oy1oe8am8oy1oe1oy1oehcoe191k98amok1oy1aN8am1ok1c94okd91ohcos1ccs1y1cam1ohoi5c1oy1coe1oe8oeo89 → constellation">h1oy298aM1ç9s2c98oy1oe8am8oy1oe1oy1oehcoe191k98amok1oy1aN8am1ok1c94okd91ohcos1ccs1y1cam1ohoi5c1oy1coe1oe8oeo89</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="k2cos4ojae1oeKoe8aP → magnificence">k2cos4ojae1oeKoe8aP</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="91coy1oy8ap4ok1ap1apo1oy4o1coy1oe8amK9s1c91oy1ae1a → multiplication">91coy1oy8ap4ok1ap1apo1oy4o1coy1oe8amK9s1c91oy1ae1a</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="1ap1o4ohoe1oeoe9s1apKoe91kam1oyKopokae8apok1oe4o8am1op2op7apo9 → chrysanthemum">1ap1o4ohoe1oeoe9s1apKoe91kam1oyKopokae8apok1oe4o8am1op2op7apo9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain" title="coy1oy1oeoh98a → mountain">coy1oy1oeoh98a</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+a" title="o → a">o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="o → ox">o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+go" title="oy → go">oy</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="coe8apok1o89oe98ay1oeKop → magnificence">coe8apok1o89oe98ay1oeKop</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+valley" title="g1coe5oes → valley">g1coe5oes</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sky" title="oes → sky">oes</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sea" title="coe → sea">coe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="2c9ohA8am4oh1oy4os1o8apoK94ohC94ok → multiplication">2c9ohA8am4oh1oy4os1o8apoK94ohC94ok</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake" title="2c94oho894oh2c91co891oy4o7azohC94ohC9 → rattlesnake">2c94oho894oh2c91co891oy4o7azohC94ohC9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="k2coayop2ayoy1oyoe1s91opok1opogoyayokcoe1oes1coech294ohcop4ohAe8amsoeC → constellation">k2coayop2ayoy1oyoe1s91opok1opogoyayokcoe1oes1coech294ohcop4ohAe8amsoeC</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="socopohcop9kco894ohCo → chrysanthemum">socopohcop9kco894ohCo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+earth" title="8aesap → earth">8aesap</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="g1coe8op2o8am4oj1oy4ojoe → magnificence">g1coe8op2o8am4oj1oy4ojoe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+hill" title="oj1oe → hill">oj1oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="4ok9okoeopok1oyoe1coy4o → multiplication">4ok9okoeopok1oyoe1coy4o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="coy8az4okcoe4osam1oyK991coy1oeo8am1oesamohoe → constellation">coy8az4okcoe4osam1oyK991coy1oeo8am1oesamohoe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="oy → ox">oy</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+go" title="ap → go">ap</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="hoamGoy4oko92aHoe9hoamsoe98aI894ok1oeoh1oyohoyoe9koe8oe8ayohop1oe2oesCcs1op1C9hapohai4o8ay1 → chrysanthemum">hoamGoy4oko92aHoe9hoamsoe98aI894ok1oeoh1oyohoyoe9koe8oe8ayohop1oe2oesCcs1op1C9hapohai4o8ay1</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding" title="s19h1coeohae8oy1cayD91cayok1ae1o → understanding">s19h1coeohae8oy1cayD91cayok1ae1o</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="y1ayHooy1coyhoy1o8ae91ap → multiplication">y1ayHooy1coyhoy1o8ae91ap</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="k1oyok1ap1oyUaps9h19h1op1oy1Hoeoha9kccC → constellation">k1oyok1ap1oyUaps9h19h1op1oy1Hoeoha9kccC</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+enlightenment" title="ayohcoeKo8oae91oyK9o1os8am4oh → enlightenment">ayohcoeKo8oae91oyK9o1os8am4oh</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+righteousness" title="oe8aq1oeohay92o2oHoH9k1oy1o8am1opo → righteousness">oe8aq1oeohay92o2oHoH9k1oy1o8am1opo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum" title="1o8az9k19k1oyh1aps2ay2ham4oh1A9k9Kae1h98an2cAp9hcap → chrysanthemum">1o8az9k19k1oyh1aps2ay2ham4oh1A9k9Kae1h98an2cAp9hcap</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="ho8ae191go895coeoe3C94okc98om1ox9ko → magnificence">ho8ae191go895coeoe3C94okc98om1ox9ko</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sky" title="82oy2oe → sky">82oy2oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+ox" title="oe → ox">oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+earth" title="Koe2k191am → earth">Koe2k191am</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="s1oyam1opok1oe1oe191am4okam8am2an4ok1oe199k98amohamK9 → multiplication">s1oyam1opok1oe1oe191am4okam8am2an4ok1oe199k98amohamK9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+sea" title="g98am4ok1989 → sea">g98am4ok1989</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon" title="k9891oy29k1989k1C94okamKoe8amKop → snapdragon">k9891oy29k1989k1C94okamKoe8amKop</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+hill" title="oy3oe → hill">oy3oe</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence" title="oeK9Joe898amHo19k19hoyamo → magnificence">oeK9Joe898amHo19k19hoyamo</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation" title="8ae2oy393oeGam4ok1om2cAy4okAsom1am1am8amKc9 → constellation">8ae2oy393oeGam4ok1om2cAy4okAsom1am1am8amKc9</a>,<br/><a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication" title="j1oomh3coh1o91oj198oe8s8eo8oe1c919K95h1oy2co1coy91oe892o2o1am2Am8am4o8amoaxAp4oh19 → multiplication">j1oomh3coh1o91oj198oe8s8eo8oe1c919K95h1oy2co1coy91oe892o2o1am2Am8am4o8amoaxAp4oh19</a>.
+            </div>
+        </div>
+
+        <div class="section-card card border-0 p-4">
+            <h2>영문 원문 (N/B 매칭 결과)</h2>
+            <p class="word-links">
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon">snapdragon</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+valley">valley</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+stream">stream</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+earth">earth</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+go">go</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding">understanding</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+enlightenment">enlightenment</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+hill">hill</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+a">a</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lake">lake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon">snapdragon</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+pomegranate">pomegranate</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+valley">valley</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+whirlwind">whirlwind</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+earth">earth</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ocean">ocean</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+a">a</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+pomegranate">pomegranate</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+hill">hill</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+whirlwind">whirlwind</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain">mountain</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain">mountain</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+a">a</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+go">go</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+valley">valley</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sea">sea</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+earth">earth</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+hill">hill</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+go">go</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding">understanding</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+enlightenment">enlightenment</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+righteousness">righteousness</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+earth">earth</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sea">sea</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon">snapdragon</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+hill">hill</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lake">lake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain">mountain</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon">snapdragon</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+valley">valley</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+stream">stream</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+rattlesnake">rattlesnake</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+magnificence">magnificence</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+a">a</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding">understanding</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+valley">valley</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding">understanding</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+ox">ox</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+a">a</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+lightning">lightning</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+go">go</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+up">up</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+chrysanthemum">chrysanthemum</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+crystal">crystal</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+mountain">mountain</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+understanding">understanding</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+enlightenment">enlightenment</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+multiplication">multiplication</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+snapdragon">snapdragon</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+sky">sky</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+constellation">constellation</a>.
+            </p>
+        </div>
+        
+        <div class="section-card card border-0 p-4">
+            <h2>GPT 완성 문장</h2>
+            <p>N/B 알고리즘으로 매칭된 100개 영어 단어들을 연결하여 만든 연속적인 문장입니다:</p>
+            <div class="english-story">ox snapdragon lightning multiplication sky valley constellation chrysanthemum ox stream earth go lightning multiplication constellation chrysanthemum understanding magnificence enlightenment hill multiplication crystal a rattlesnake lake snapdragon lightning pomegranate constellation crystal valley whirlwind sky earth multiplication ocean constellation a chrysanthemum ox multiplication lightning crystal rattlesnake sky constellation pomegranate hill lightning multiplication ox rattlesnake constellation whirlwind magnificence mountain lightning crystal rattlesnake constellation magnificence multiplication chrysanthemum mountain a ox go magnificence valley sky sea multiplication rattlesnake constellation chrysanthemum earth magnificence hill multiplication constellation ox go chrysanthemum understanding multiplication constellation enlightenment righteousness chrysanthemum magnificence sky ox earth multiplication sea snapdragon hill magnificence constellation multiplication rattlesnake lake mountain chrysanthemum ox crystal lightning snapdragon rattlesnake sky multiplication constellation valley lightning stream rattlesnake sky magnificence a multiplication constellation chrysanthemum lightning understanding valley multiplication constellation chrysanthemum lightning crystal understanding multiplication sky ox a constellation lightning go up multiplication chrysanthemum constellation crystal mountain understanding enlightenment multiplication snapdragon sky constellation</div>
+        </div>
+        
+        <div class="section-card card border-0 p-4">
+            <h2>한국어 번역</h2>
+            <p class="word-links">
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+금어초">금어초</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계곡">계곡</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+스트림">스트림</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+지구">지구</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+가다">가다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+이해">이해</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계몽">계몽</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+언덕">언덕</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하나">하나</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+호수">호수</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+금어초">금어초</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+석류">석류</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계곡">계곡</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+회오리바람">회오리바람</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+지구">지구</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+바다">바다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하나">하나</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+석류">석류</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+언덕">언덕</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+회오리바람">회오리바람</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+산">산</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+산">산</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하나">하나</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+가다">가다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계곡">계곡</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+바다">바다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+지구">지구</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+언덕">언덕</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+가다">가다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+이해">이해</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계몽">계몽</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+의로움">의로움</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+지구">지구</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+바다">바다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+금어초">금어초</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+언덕">언덕</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+호수">호수</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+산">산</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+금어초">금어초</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계곡">계곡</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+스트림">스트림</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+방울뱀">방울뱀</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+장엄함">장엄함</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하나">하나</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+이해">이해</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계곡">계곡</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+이해">이해</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+소">소</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하나">하나</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+번개">번개</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+가다">가다</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+위">위</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+국화">국화</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+크리스탈">크리스탈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+산">산</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+이해">이해</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+계몽">계몽</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+곱셈">곱셈</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+금어초">금어초</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+하늘">하늘</a>,
+                <a href="https://search.naver.com/search.naver?query=보이니치+해석+별자리">별자리</a>.
+            </p>
+        </div>
+        
+        <div class="section-card card border-0 p-4">
+            <h2>GPT 이야기 풀이</h2>
+            <div class="story-box">천상의 하늘 아래, 소와 금어초가 어우러진 계곡은 우주와 지구의 조화를 상징한다. 이곳에서 번개가 내리치며 구름의 속삭임이 들려온다. 별자리는 과거의 영웅들과 신비로운 이야기들을 말해주고, 국화는 삶의 덧없음을 노래한다. 번개와 곱셈의 만남은 단순한 자연 현상이 아닌, 존재의 깊이를 탐구하는 철학적 질문으로 이어진다. 우리는 이 하늘 아래에서 자신을 이해하고, 장엄함을 느끼며, 끊임없이 계몽의 길을 걸어가야 한다.
+
+산과 언덕이 마주하는 곳에 위치한 호수는 영혼의 반영을 비춘다. 방울뱀의 존재는 삶의 위협과도 같은 불가사의한 힘을 상징하며, 그 속에서 우리는 조화의 중요성을 깨닫는다. 크리스탈처럼 맑은 물은 세상의 진리를 드러내고, 그 진리는 번개처럼 갑작스럽게 우리의 마음에 스쳐 지나간다. 이렇게 우리는 자연의 법칙을 통해 의로움에 이르는 길을 찾을 수 있다.
+
+해가 지고 별들이 빛나는 밤, 그 속에서 우리는 각자의 길을 찾는다. 금어초는 우리에게 끊임없는 탐구의 필요성을 일깨워주고, 바다는 무한한 가능성을 상징한다. 이해와 계몽은 우리를 한 걸음 더 나아가게 하며, 번개와 함께하는 순간은 우리에게 삶의 경이로움을 상기시킨다. 별자리 속에 숨겨진 진리는 조화와 균형을 통해만 발견될 수 있으며, 이는 우리 삶의 목적이기도 하다.
+
+마지막으로, 이러한 신비로운 이야기는 우리의 내면을 반영한다. 우리는 소와 같은 순수함을 잃지 않으면서도, 번개와 같은 강렬함 속에서 자신을 찾고자 한다. 하늘과 지구, 이 두 극을 잇는 것은 우리의 사유와 탐구이며, 그것이 바로 보이니치 원고가 전하고자 하는 메시지일지도 모른다. 삶의 여정은 끝없는 곱셈처럼 계속되고, 우리는 그 안에서 의미를 찾아가야 한다.</div>
+        </div>
+        
+        <div class="section-card card border-0 p-4">
+            <h2>영상 해설</h2>
+            <p class="mb-3">N/B 알고리즘을 활용한 보이니치 원고 해석 과정을 영상으로 확인하세요.</p>
+            <div class="ratio ratio-16x9">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/SHVFxGJlkgk?si=uir4USDGUCkNq7iM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div class="section-card card border-0 p-4">
+            <h2>참고 자료 및 링크</h2>
+            <ul class="list-unstyled">
+                <li class="mb-3">
+                    <a href="https://www.voynich.nu/intro.html" target="_blank" class="btn btn-outline-primary btn-sm">
+                        🔗 Voynich Manuscript Official Website
+                    </a>
+                    <span class="ms-2">- 보이니치 원고 공식 정보</span>
+                </li>
+                <li class="mb-3">
+                    <a href="https://www.youtube.com/watch?v=SHVFxGJlkgk" target="_blank" class="btn btn-outline-danger btn-sm">
+                        🎥 YouTube: 보이니치 원고 해석 영상
+                    </a>
+                    <span class="ms-2">- N/B 알고리즘 설명 영상</span>
+                </li>
+                <li>
+                    <a href="file:///E:/Ai%20project/%EB%B3%B4%EC%9D%B4%EB%8B%88%EC%B9%98/[xn--3e0bx5eku0am2irhf.xn--3e0b707e]%202026.02.15%E2%80%94%EA%B5%AD%EC%9D%B8%ED%84%B0%EB%84%B7.%ED%95%9C%EA%B5%AD%20%EB%8F%84%EB%A9%94%EC%9D%B8%20%EA%B4%80%EB%A6%AC%20%EB%B3%B4%EA%B3%A0%EC%84%9C%20ver%200.1.mht" target="_blank" class="btn btn-outline-primary btn-sm">
+                        📄 도메인 관리 보고서
+                    </a>
+                    <span class="ms-2">- 프로젝트 상세 보고</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p class="mb-1">© 2026 Voynich Manuscript Analysis Project</p>
+            <p class="mb-0">Generated: 2026.02.15 | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

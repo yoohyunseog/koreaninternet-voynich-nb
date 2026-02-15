@@ -5,7 +5,9 @@ echo 보이니치 프로젝트 GitHub 업로드
 echo ================================================================================
 echo.
 
-cd /d "E:\Ai project\보이니치"
+set "PROJECT_DIR=%~dp0.."
+for %%I in ("%PROJECT_DIR%") do set "PROJECT_DIR=%%~fI"
+cd /d "%PROJECT_DIR%"
 
 REM Git 초기화 확인
 if not exist ".git" (
@@ -70,13 +72,13 @@ echo.
 
 REM 파일 추가
 echo [4/5] 파일 추가 중...
-git add voynich_analyzer.py
-git add advanced_nb_calculator.py
-git add language_database.py
-git add voynich_data.txt
+git add src\voynich_analyzer.py
+git add src\advanced_nb_calculator.py
+git add src\language_database.py
+git add data\voynich_data.txt
 git add README.md
-git add run_voynich.bat
-git add upload_github.bat
+git add tools\run_voynich.bat
+git add tools\upload_github.bat
 git add .gitignore
 echo.
 
